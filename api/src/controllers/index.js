@@ -6,26 +6,27 @@ const { API_KEY } = process.env;
 
 //* PEDIDO DE DATOS A LA API
 
-const getAllApi = async () => {
-  const totalGames = [];
+const getApiInfo = async () => {
+  const allGames = [];
 
   for (let i = 1; i <= 5; i++) {
     let infoApi = await axios.get(
       `https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`
     );
     infoApi.data.results.map((e) => {
-      totalGames.push({
+      allGames.push({
         id: e.id,
         name: e.name,
-        image: e.background_image,
+        img: e.background_image,
         genres: e.genres.map((e) => e.name).join(", "),
         released: e.released,
         rating: e.rating,
-        platform: e.platform.map((e) => e.platform.name).join(", "),
+        platform: e.platforms.map((e) => e.platform.name).join(", "),
       });
     });
   }
-  return totalGames;
+
+  return allGames;
 };
 
 //* PEDIDO A LA BASE DE DATOS
@@ -46,7 +47,7 @@ const getInfoDb = async () => {
 //* UNION
 
 const getAllVideogames = async () => {
-  const apiInfo = await getAllApi();
+  const apiInfo = await getApiInfo();
   const dbInfo = await getInfoDb();
   const allVideogames = apiInfo.concat(dbInfo);
   return allVideogames;

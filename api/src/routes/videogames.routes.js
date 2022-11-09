@@ -15,9 +15,11 @@ router.get("/", async (req, res) => {
       const game = allVideogames.filter((el) =>
         el.name.toLowerCase().includes(name.toLowerCase())
       );
-      game.length ? 
-        res.status(200).send(game) :
-        res.status(404).send('No se encuentra el videojuego');
+      game.length
+        ? res.status(200).json(game)
+        : res
+            .status(404)
+            .send(`No se ha podido encontrar ${name} en nuestra libreria`);
     }
     // Sino devolvemos todos los juegos
     res.status(200).json(allVideogames);
@@ -26,5 +28,31 @@ router.get("/", async (req, res) => {
     console.log(error);
   }
 });
+
+//* OBTENER POR ID
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const totalVideogames = await getAllVideogames();
+    // Si hay ID la devolvemos
+    if (id) {
+      const gameId = totalVideogames.filter((el) => el.id == id);
+      gameId.length
+        ? res.status(200).json(gameId)
+        : res.status(404).send("Busqueda no encontrada");
+    }
+  } catch (error) {
+    res.status(404).send(error);
+    console.log(error);
+  }
+});
+
+//* CREAR UN NUEVO VIDEOJUEGO
+
+router.post("/", async(req, res) => {
+  
+})
 
 module.exports = router;

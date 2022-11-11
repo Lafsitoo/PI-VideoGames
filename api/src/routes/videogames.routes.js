@@ -1,28 +1,30 @@
 const { Router } = require("express");
 const { Videogame, Genre } = require("../db");
 const { getAllVideogames } = require("../controllers/index");
+const checkData = require("../middlewares/checkdata");
 const router = Router();
 
 //* OBTENER TODOS LOS JUEGOS O POR NAME
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
-  // ej: videogames?name=portal
+  // ej: "/videogames?name=portal"
   try {
     const allVideogames = await getAllVideogames();
     if (name) {
-      // Verificamos si name esta en el query
-      const game = allVideogames.filter((el) =>
-        el.name.toLowerCase().includes(name.toLowerCase())
+      // Verificamos si "name" esta en nuestra bibloteca
+      const gameName = allVideogames.filter((e) =>
+        e.name.toLowerCase().includes(name.toLowerCase())
       );
-      game.length
-        ? res.status(200).json(game)
+      gameName.length
+        ? res.status(200).json(gameName)
         : res
             .status(404)
-            .send(`No se ha podido encontrar ${name} en nuestra libreria`);
+            .send(`No se ha podido encuentrar ${name} en nuestra bibloteca`);
+    } else {
+      // Sino devolvemos todos los juegos
+      res.status(200).send(allVideogames);
     }
-    // Sino devolvemos todos los juegos
-    res.status(200).json(allVideogames);
   } catch (error) {
     res.status(404).send(error);
     console.log(error);
@@ -51,8 +53,7 @@ router.get("/:id", async (req, res) => {
 
 //* CREAR UN NUEVO VIDEOJUEGO
 
-router.post("/", async(req, res) => {
-  
+router.post("/", async (req, res) => {
 })
 
 module.exports = router;

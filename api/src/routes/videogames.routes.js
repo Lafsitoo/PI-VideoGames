@@ -68,7 +68,6 @@ router.post("/", async (req, res) => {
       // platforms: platforms.join('- '),
       // platforms: platforms.toString(),
       image,
-      genres,
     });
     // busco la genre en db
     const genreInDb = await Genre.findAll({

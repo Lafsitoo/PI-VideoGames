@@ -54,6 +54,34 @@ router.get("/:id", async (req, res) => {
 //* CREAR UN NUEVO VIDEOJUEGO
 
 router.post("/", async (req, res) => {
-})
+  // info que pido
+  const { name, description, released, rating, platforms, image, genres } =
+    req.body;
+  try {
+    // creo nuevo game, sin "genres"
+    const gameCreated = await Videogame.create({
+      name,
+      description,
+      released,
+      rating,
+      platforms,
+      // platforms: platforms.join('- '),
+      // platforms: platforms.toString(),
+      image,
+      genres,
+    });
+    // busco la genre en db
+    const genreInDb = await Genre.findAll({
+      where: { name: genres },
+    });
+    // lo añadimos
+    gameCreated.addGenre(genreInDb);
+    res
+      .status(200)
+      .send(`¡Felicidades! ${name} añadido a la bibloteca con Exito`);
+  } catch (error) {
+    res.status(404).send({ error: error.message });
+  }
+});
 
 module.exports = router;

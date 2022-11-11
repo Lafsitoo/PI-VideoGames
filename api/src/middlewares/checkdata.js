@@ -2,7 +2,7 @@ const {Videogame} = require("../db")
 
 const checkData = async (req, res, next) => {
   // Info que pido
-  const { name, description, released, rating, platforms, image, genres } =
+  const { name, description, platforms, genres } =
     req.body;
   //* VALIDACIÓN
   // Apartados oblicatorios

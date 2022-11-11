@@ -1,3 +1,5 @@
+const {Videogame} = require("../db")
+
 const checkData = async (req, res, next) => {
   // Info que pido
   const { name, description, released, rating, platforms, image, genres } =
@@ -7,7 +9,7 @@ const checkData = async (req, res, next) => {
   if (!(name && description && platforms)) {
     return res.status(404).send({ error: "Fatan parámetros obligatorios" });
   }
-  if (genres.length != 0) {
+  if (genres.length === 0) {
     return res.status(404).send({ error: "Fatan generos obligatorios" });
   }
   // Si nombre del juego ya existe

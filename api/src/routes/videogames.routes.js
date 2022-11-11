@@ -53,7 +53,7 @@ router.get("/:id", async (req, res) => {
 
 //* CREAR UN NUEVO VIDEOJUEGO
 
-router.post("/", async (req, res) => {
+router.post("/", checkData, async (req, res) => {
   // info que pido
   const { name, description, released, rating, platforms, image, genres } =
     req.body;

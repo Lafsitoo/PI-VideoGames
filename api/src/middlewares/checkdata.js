@@ -4,7 +4,9 @@ const checkData = async (req, res, next) => {
   // Info que pido
   const { name, description, platforms, genres } =
     req.body;
+    
   //* VALIDACIÓN
+  
   // Apartados oblicatorios
   if (!(name && description && platforms)) {
     return res.status(404).send({ error: "Fatan parámetros obligatorios" });

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import "./From.css"
 // Hooks React - Redux
 import { useDispatch, useSelector } from "react-redux";
 // Actions Redux

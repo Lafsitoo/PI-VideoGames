@@ -11,11 +11,16 @@ import {} from "../../redux/actions";
 
 // Componenetes React
 import Form from "../Form/Form";
+import NavBar from "../NavBar/NavBar";
 
 //* COMPONENTE
 
 function Home() {
-  return <div></div>;
+  return (
+    <div>
+      <NavBar />
+    </div>
+  )
 }
 
 export default Home;

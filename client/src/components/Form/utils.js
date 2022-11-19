@@ -1,0 +1,32 @@
+export const platformsList = [
+  "PC",
+  "iOS",
+  "Android",
+  "macOS",
+  "PlayStation 4",
+  "PlayStation 5",
+  "Xbox",
+  "PS Vita",
+];
+
+export const genresList = [
+  "Action",
+  "Indie",
+  "Adventure",
+  "RPG",
+  "Strategy",
+  "Shooter",
+  "Casual",
+  "Simulation",
+  "Arcade",
+  "Platformer",
+  "Puzzle",
+  "Racing",
+  "Massively Multiplayer",
+  "Fighting",
+  "Family",
+  "Board Games",
+  "Sports",
+  "Educational",
+  "Card",
+];
